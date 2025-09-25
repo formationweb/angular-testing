@@ -1,4 +1,10 @@
 <p testUserName>{{ user.name }}</p>
 <p testUserEmail>{{ user.email }}</p>
 
-<button (click)="deleteUser()" testDeleteBtn>Supprimer</button>
+<button 
+    confirm="Etes vous de ..." 
+    [confirmUsername]="user.name" 
+    (onConfirm)="deleteUser()" 
+    testDeleteBtn>
+    Supprimer
+</button>

@@ -1,9 +1,10 @@
 import { Component, EventEmitter, input, Input, Output } from '@angular/core';
 import { User } from '../../core/interfaces/user';
+import { ConfirmDirective } from '../../core/directives/confirm';
 
 @Component({
   selector: 'app-user-card',
-  imports: [],
+  imports: [ConfirmDirective],
   templateUrl: './user-card.html',
   styleUrl: './user-card.css'
 })
