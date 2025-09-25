@@ -8,4 +8,8 @@ import { Component, OnInit, signal } from '@angular/core';
 })
 export class App {
  title = signal('myapp');
+
+ test() {
+   this.title.set('nouveau titre')
+ }
 }
