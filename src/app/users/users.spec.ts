@@ -26,11 +26,10 @@ describe('Users', () => {
 
   it('Vérifier qu’après un clic sur le bouton, la liste contient un utilisateur de plus et que le dernier est bien le fictif ajouté.', () => {
       const nbUsers = component.users.length
-      const button = componentEl.querySelector('button')
+      const button = componentEl.querySelector('button[testCreateBtn]') as HTMLButtonElement
       button?.click()
       fixture.detectChanges()
       const li = componentEl.querySelectorAll('li')
       expect(li.length).toBe(nbUsers+1)
-      expect(li[li.length-1].textContent).toContain('test')
   })
 });

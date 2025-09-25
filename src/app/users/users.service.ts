@@ -1,10 +1,11 @@
 import { Injectable } from "@angular/core";
+import { User } from "../core/interfaces/user";
 
 @Injectable({
     providedIn: 'root'
 })
 export class UsersService {
-    getAll() {
+    getAll(): User[] {
         return [
             {
               "id": 1,

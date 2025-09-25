@@ -1,9 +1,9 @@
 <ul>
     @for (user of users ; track user.id) {
         <li>
-            {{ user.name}} - {{ user.email }}
+            <app-user-card [user]="user" />
         </li>
     }
 </ul>
 
-<button (click)="createUser()">Créer utilisateur</button>
+<button (click)="createUser()" testCreateBtn>Créer utilisateur</button>

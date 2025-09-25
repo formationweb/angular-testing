@@ -1,9 +1,10 @@
 import { Component, inject } from '@angular/core';
 import { UsersService } from './users.service';
+import { UserCard } from './user-card/user-card';
 
 @Component({
   selector: 'app-users',
-  imports: [],
+  imports: [UserCard],
   templateUrl: './users.html',
   styleUrl: './users.css',
 })
