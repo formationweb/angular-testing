@@ -25,12 +25,4 @@ describe('Tester App', () => {
     expect(component.title()).toBe('myapp')
     expect(h1De?.nativeElement.textContent).toContain(component.title())
   })
-
-  it('Déclencher test', () => {
-    const buttonEl = componentDe.query(By.css('button'))
-    buttonEl.triggerEventHandler('click')
-    // const buttonEl = componentEl.querySelector('button')
-    // buttonEl?.click()
-    //fixture.detectChanges()
-  })
 })
