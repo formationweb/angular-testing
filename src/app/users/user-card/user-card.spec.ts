@@ -51,6 +51,7 @@ describe('UserCard', () => {
 
   it('suppression emet un événement', () => {
    // let emitId = null as number | null
+    spyOn(window, 'confirm').and.returnValue(true);
     const spy = spyOn(component.onDelete, 'emit')
 
     // onDelete.subscribe((id) => {
