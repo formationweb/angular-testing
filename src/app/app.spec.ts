@@ -1,23 +1,24 @@
-import { TestBed } from '@angular/core/testing';
-import { App } from './app';
+import { ComponentFixture, TestBed } from "@angular/core/testing"
+import { App } from "./app"
 
-describe('App', () => {
+describe('Tester App', () => {
+  let fixture: ComponentFixture<App>
+  let component: App
+  let componentEl: HTMLElement
+
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [App],
-    }).compileComponents();
-  });
+      imports: [App]
+    }).compileComponents()
+    fixture = TestBed.createComponent(App)
+    fixture.detectChanges()
+    component = fixture.componentInstance
+    componentEl = fixture.nativeElement
+  })
 
-  it('should create the app', () => {
-    const fixture = TestBed.createComponent(App);
-    const app = fixture.componentInstance;
-    expect(app).toBeTruthy();
-  });
-
-  it('should render title', () => {
-    const fixture = TestBed.createComponent(App);
-    fixture.detectChanges();
-    const compiled = fixture.nativeElement as HTMLElement;
-    expect(compiled.querySelector('h1')?.textContent).toContain('Hello, myapp');
-  });
-});
+  it('myapp est bien h1', () => {
+    const h1 = componentEl.querySelector('h1')
+    expect(component.title()).toBe('myapp')
+    expect(h1?.textContent).toContain(component.title())
+  })
+})
