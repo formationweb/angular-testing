@@ -1,9 +1,10 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, fakeAsync, TestBed, tick } from '@angular/core/testing';
 
 import { Navbar } from './navbar';
 import { DebugElement } from '@angular/core';
 import { By } from '@angular/platform-browser';
 import { FormsModule, NgModel } from '@angular/forms';
+import { of } from 'rxjs';
 
 describe('Navbar', () => {
   let component: Navbar;
@@ -39,4 +40,39 @@ describe('Navbar', () => {
 
   //   expect(modelDir.valid).toBe(false)
   // });
+
+  it('Debounce: une requête n’est envoyée qu’après d’inactivité.', fakeAsync(() => {
+    const spy = spyOn(component as any, 'performSearch').and.returnValue(of(
+      [
+        {  id : 1, name: `test result 1` }
+      ]
+    ))
+    
+    component.userName.setValue('test')
+    
+    tick(499)
+
+    expect(spy).not.toHaveBeenCalled()
+
+    tick(1)
+
+    expect(spy).toHaveBeenCalled()
+
+  }))
+
+  it('DistinctUntilChanged : saisir deux fois le même terme ne provoque qu’un seul appel au service.', fakeAsync(() => {
+    const spy = spyOn(component as any, 'performSearch').and.returnValue(of(
+      [
+        {  id : 1, name: `test result 1` }
+      ]
+    ))
+
+    component.userName.setValue('test')
+    component.userName.setValue('test')
+    component.userName.setValue('test')
+
+    tick(500)
+
+    expect(spy).toHaveBeenCalledTimes(1)
+  }))
 });
