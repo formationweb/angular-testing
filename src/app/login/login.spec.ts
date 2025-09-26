@@ -1,6 +1,9 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { Login } from './login';
+import { RouterTestingHarness } from '@angular/router/testing';
+import { provideRouter } from '@angular/router';
+import { routes } from '../app.routes';
 
 describe('Login', () => {
   let component: Login;
@@ -9,7 +12,10 @@ describe('Login', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [Login]
+      imports: [Login],
+      providers: [
+        provideRouter(routes.filter(route => route.path == 'login'))
+      ]
     })
     .compileComponents();
 
@@ -18,6 +24,11 @@ describe('Login', () => {
     el = fixture.nativeElement
     fixture.detectChanges();
   });
+
+  it('Tester le router', async () => {
+    const harness = await RouterTestingHarness.create()
+    await harness.navigateByUrl('/login')
+  })
 
   it('La validité/invalidité du champ email selon la saisie.', () => {
     const email =  component.propEmail

@@ -2,16 +2,23 @@ import { ComponentFixture, TestBed } from "@angular/core/testing"
 import { App } from "./app"
 import { DebugElement } from "@angular/core"
 import { By } from "@angular/platform-browser"
+import { provideRouter, Router } from "@angular/router"
+import { RouterTestingHarness } from "@angular/router/testing"
+import { Login } from "./login/login"
+import { routes } from "./app.routes"
 
 describe('Tester App', () => {
   let fixture: ComponentFixture<App>
   let component: App
   let componentEl: HTMLElement
   let componentDe: DebugElement
+  let router: Router
+  let location: Location
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [App]
+      imports: [App],
+      
     }).compileComponents()
     fixture = TestBed.createComponent(App)
     fixture.detectChanges()
@@ -26,4 +33,6 @@ describe('Tester App', () => {
     // expect(h1De?.nativeElement.textContent).toContain(component.title())
     expect(component).toBeTruthy()
   })
+
+ 
 })
