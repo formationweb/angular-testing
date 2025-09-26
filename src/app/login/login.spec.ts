@@ -2,19 +2,36 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { Login } from './login';
 import { RouterTestingHarness } from '@angular/router/testing';
-import { provideRouter } from '@angular/router';
+import { provideRouter, Router } from '@angular/router';
 import { routes } from '../app.routes';
+import { provideHttpClient } from '@angular/common/http';
+import { Observable, of } from 'rxjs';
+import { Auth, LoginCredentials, LoginResponse } from './auth';
+
+// class AuthMock {
+//   login(credentials: LoginCredentials): Observable<LoginResponse> {
+//     return of({ token: 'test' })
+//   }
+// }
 
 describe('Login', () => {
   let component: Login;
   let fixture: ComponentFixture<Login>;
   let el: HTMLElement
+  let loginSpy = jasmine.createSpy('loginSpy').and.returnValue(of({ token: 'test' }))
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       imports: [Login],
       providers: [
-        provideRouter(routes.filter(route => route.path == 'login'))
+        provideRouter(routes.filter(route => route.path == 'login')),
+        provideHttpClient(),
+        {
+          provide: Auth,
+          useValue: {
+            login: loginSpy
+          }
+        }
       ]
     })
     .compileComponents();
@@ -60,8 +77,11 @@ describe('Login', () => {
     })
 
     it('Que login() modifie bien l’état submitted.', () => {
+      const router = TestBed.inject(Router)
+      const spy = spyOn(router, 'navigateByUrl')
       expect(component.submitted()).toBeFalse()
       component.login()
+      expect(spy).toHaveBeenCalled()
       expect(component.submitted()).toBeTrue()
     })
 

@@ -4,7 +4,7 @@ import { Navbar } from './navbar';
 import { DebugElement } from '@angular/core';
 import { By } from '@angular/platform-browser';
 import { FormsModule, NgModel } from '@angular/forms';
-import { of } from 'rxjs';
+import { of, switchMap } from 'rxjs';
 
 describe('Navbar', () => {
   let component: Navbar;
@@ -74,5 +74,24 @@ describe('Navbar', () => {
     tick(500)
 
     expect(spy).toHaveBeenCalledTimes(1)
+  }))
+
+  it('catchError', fakeAsync(() => {
+    spyOn(component as any, 'performSearch').and.returnValue(
+        of(null).pipe(
+          switchMap(() => {
+            throw new Error('Simulated API error')
+          })
+        )
+    )
+    spyOn(console, 'log')
+
+    component.userName.setValue('test')
+
+    tick(500)
+
+    expect(component.loading).toBe(false)
+    expect(component.searchResults).toEqual([])
+    expect(console.log).toHaveBeenCalledWith(jasmine.any(Error))
   }))
 });

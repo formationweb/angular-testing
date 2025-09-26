@@ -28,9 +28,12 @@ export class Navbar {
         throw err
       })
     )
-    .subscribe((val) => {
-      this.loading = false
-      this.searchResults = val
+    .subscribe({
+      next: (val) => {
+        this.loading = false
+        this.searchResults = val
+      },
+      error: (err) => {}
     })
   }
 
