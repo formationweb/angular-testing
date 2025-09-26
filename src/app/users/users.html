@@ -1,7 +1,7 @@
 <ul>
-    @for (user of users ; track user.id) {
+    @for (user of users$ | async ; track user.id) {
         <li>
-            <app-user-card [user]="user" />
+            <app-user-card [user]="user" (onDelete)="deleteUser($event)" />
         </li>
     }
 </ul>
