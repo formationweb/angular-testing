@@ -1,2 +1,8 @@
-<input type="text" placeholder="Rechercher" [(ngModel)]="userName" required>
+<input type="text" placeholder="Rechercher" [formControl]="userName" required>
 <button>Rechercher</button>
+
+<ul>
+    @for (search of searchResults ; track search.id) {
+        <li>{{ search.name }}</li>
+    }
+</ul>

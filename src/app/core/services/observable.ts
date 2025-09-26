@@ -12,7 +12,7 @@ export class ObsService {
         //     subscriber.next(3)
         //     subscriber.complete()
         // })
-        return timer(1000).pipe(
+        return timer(10000).pipe(
             switchMap(() => of('a', 'b', 'c'))
         )
     }
