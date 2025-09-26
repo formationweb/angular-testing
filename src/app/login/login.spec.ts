@@ -50,8 +50,8 @@ describe('Login', () => {
   it('La validité/invalidité du champ email selon la saisie.', () => {
     const email =  component.propEmail
     email.setValue('')
-    expect(email.valid).toBeFalse()
-    expect(email.hasError('required')).toBeTrue()
+    expect(email.valid).toBe(false)
+    expect(email.hasError('required')).toBe(true)
   })
 
   it('Le comportement du champ password.', () => {

@@ -30,7 +30,7 @@ describe('Auth', () => {
       token: 'test'
      }
 
-     const resultSpy = jasmine.createSpy('resultSpy')
+     const resultSpy = jest.fn()
 
      service.login(credentials).subscribe(resultSpy)
 

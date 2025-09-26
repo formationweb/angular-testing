@@ -61,7 +61,7 @@ describe('Navbar', () => {
   }))
 
   it('DistinctUntilChanged : saisir deux fois le même terme ne provoque qu’un seul appel au service.', fakeAsync(() => {
-    const spy = spyOn(component as any, 'performSearch').and.returnValue(of(
+    const spy = jest.spyOn(component as any, 'performSearch').mockReturnValue(of(
       [
         {  id : 1, name: `test result 1` }
       ]
